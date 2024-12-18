@@ -42,7 +42,7 @@ jobs:
               required_status_checks: false,
               enforce_admins: protection.data.enforce_admins.enabled,
               required_pull_request_reviews: protection.data.required_pull_request_reviews,
-              restrictions: protection.data.restrictions.enabled,
+              restrictions: false,
               allow_force_pushes: updatedProtection.allow_force_pushes, // 更新内容
               allow_deletions: updatedProtection.allow_deletions, // 更新内容
               lock_branch: true, // 更新内容
