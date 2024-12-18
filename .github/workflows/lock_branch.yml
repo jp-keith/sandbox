@@ -34,23 +34,31 @@ jobs:
 
 
 
+            # // 更新リクエスト
+            # await github.rest.repos.updateBranchProtection({
+            #   owner,
+            #   repo,
+            #   branch,
+            #   required_status_checks: null,
+            #   enforce_admins: protection.data.enforce_admins.enabled || null,
+            #   required_pull_request_reviews: {
+            #     dismiss_stale_reviews: protection.data.required_pull_request_reviews.dismiss_stale_reviews || false,
+            #     require_code_owner_reviews: protection.data.required_pull_request_reviews.require_code_owner_reviews || false,
+            #     required_approving_review_count:  protection.data.required_pull_request_reviews.required_approving_review_count,
+            #     require_last_push_approval :  protection.data.required_pull_request_reviews.require_last_push_approval,
+            #   },
+            #   restrictions: null, // "Only organization repositories can have users and team restrictions"
+            #   lock_branch: true, // 更新内容
+            #   allow_force_pushes: updatedProtection.allow_force_pushes, // 更新内容
+            #   allow_deletions: updatedProtection.allow_deletions, // 更新内容
+            # });
+
             // 更新リクエスト
             await github.rest.repos.updateBranchProtection({
               owner,
               repo,
               branch,
-              required_status_checks: null,
-              enforce_admins: protection.data.enforce_admins.enabled || null,
-              required_pull_request_reviews: {
-                dismiss_stale_reviews: protection.data.required_pull_request_reviews.dismiss_stale_reviews || false,
-                require_code_owner_reviews: protection.data.required_pull_request_reviews.require_code_owner_reviews || false,
-                required_approving_review_count:  protection.data.required_pull_request_reviews.required_approving_review_count,
-                require_last_push_approval :  protection.data.required_pull_request_reviews.require_last_push_approval,
-              },
-              restrictions: null, // "Only organization repositories can have users and team restrictions"
               lock_branch: true, // 更新内容
-              allow_force_pushes: updatedProtection.allow_force_pushes, // 更新内容
-              allow_deletions: updatedProtection.allow_deletions, // 更新内容
             });
-
+            
             console.log(`Branch protection for '${branch}' successfully updated.`);
