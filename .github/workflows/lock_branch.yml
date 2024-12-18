@@ -15,7 +15,7 @@ jobs:
           script: |
             const owner = context.repo.owner;
             const repo = context.repo.repo;
-            const branch = "main"; // ロック対象のブランチ
+            const branch = "lock/test2"; // ロック対象のブランチ
 
             // 現在のブランチ保護ルールを取得
             const protection = await github.rest.repos.getBranchProtection({
