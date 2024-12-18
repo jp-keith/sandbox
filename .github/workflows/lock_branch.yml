@@ -32,31 +32,6 @@ jobs:
               allow_deletions: false, // ブランチ削除のロック
             };
 
-            console.log('%o', {
-              owner,
-              repo,
-              branch,
-            } );
-
-            console.log('%o', {
-              enforce_admins: protection.data.enforce_admins.enabled,
-              required_pull_request_reviews: protection.data.required_pull_request_reviews,
-            } );
-
-            console.log('%o', {
-              allow_force_pushes: updatedProtection.allow_force_pushes, // 更新内容
-              allow_deletions: updatedProtection.allow_deletions, // 更新内容
-            } );
-
-            console.log('%o', {
-              block_creations: protection.data.block_creations.enabled,
-            } );
-
-            console.log('%o', {
-              required_conversation_resolution: protection.data.required_conversation_resolution.enabled,
-              lock_branch: true, // 更新内容
-              allow_fork_syncing: protection.data.allow_fork_syncing.enabled 
-            } );
 
 
             // 更新リクエスト
@@ -64,14 +39,13 @@ jobs:
               owner,
               repo,
               branch,
+              required_status_checks: protection.data.required_status_checks.enabled,
               enforce_admins: protection.data.enforce_admins.enabled,
               required_pull_request_reviews: protection.data.required_pull_request_reviews,
+              restrictions: protection.data.restrictions.enabled,
               allow_force_pushes: updatedProtection.allow_force_pushes, // 更新内容
               allow_deletions: updatedProtection.allow_deletions, // 更新内容
-              block_creations: protection.data.block_creations.enabled,
-              required_conversation_resolution: protection.data.required_conversation_resolution.enabled,
               lock_branch: true, // 更新内容
-              allow_fork_syncing: protection.data.allow_fork_syncing.enabled 
             });
 
             console.log(`Branch protection for '${branch}' successfully updated.`);
