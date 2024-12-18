@@ -24,6 +24,7 @@ jobs:
               branch,
             });
 
+            console.log('%o', protection );
 
             // 必要なフィールドを更新
             const updatedProtection = {
@@ -47,6 +48,9 @@ jobs:
             console.log('%o', {
               allow_force_pushes: updatedProtection.allow_force_pushes, // 更新内容
               allow_deletions: updatedProtection.allow_deletions, // 更新内容
+            } );
+
+            console.log('%o', {
               block_creations: protection.data.block_creations.enabled,
             } );
 
