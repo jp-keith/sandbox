@@ -38,12 +38,12 @@ jobs:
               owner,
               repo,
               branch,
-              required_status_checks: updatedProtection.required_status_checks,
-              enforce_admins: updatedProtection.enforce_admins.enabled,
-              required_pull_request_reviews: updatedProtection.required_pull_request_reviews,
-              restrictions: updatedProtection.restrictions,
-              allow_force_pushes: updatedProtection.allow_force_pushes, // 更新内容
-              allow_deletions: updatedProtection.allow_deletions, // 更新内容
+              required_status_checks: updatedProtection.required_status_checks || false,
+              enforce_admins: updatedProtection.enforce_admins.enabled || false,
+              required_pull_request_reviews: updatedProtection.required_pull_request_reviews || false,
+              restrictions: updatedProtection.restrictions || null,
+              allow_force_pushes: updatedProtection.allow_force_pushes || false, // 更新内容
+              allow_deletions: updatedProtection.allow_deletions || false, // 更新内容
             });
 
             console.log(`Branch protection for '${branch}' successfully updated.`);
