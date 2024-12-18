@@ -24,11 +24,15 @@ jobs:
               branch,
             });
 
+            console.log('%o', protection );
+
             // 必要なフィールドを更新
             const updatedProtection = {
               allow_force_pushes: false, // 強制プッシュを禁止
               allow_deletions: false, // ブランチ削除のロック
             };
+
+            console.log('%o', updatedProtection );
 
             // 更新リクエスト
             await github.rest.repos.updateBranchProtection({
