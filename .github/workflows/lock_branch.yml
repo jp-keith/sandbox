@@ -39,12 +39,13 @@ jobs:
               owner,
               repo,
               branch,
-              required_status_checks: protection.required_status_checks,
-              enforce_admins: protection.enforce_admins.properties.enabled,
-              required_pull_request_reviews: protection.required_pull_request_reviews,
-              restrictions: protection.restrictions,
+              required_status_checks: protection.data.required_status_checks,
+              enforce_admins: protection.data.enforce_admins.enabled,
+              required_pull_request_reviews: protection.data.required_pull_request_reviews,
+              restrictions: protection.data.restrictions,
               allow_force_pushes: updatedProtection.allow_force_pushes, // 更新内容
               allow_deletions: updatedProtection.allow_deletions, // 更新内容
+              lock_branch: true
             });
 
             console.log(`Branch protection for '${branch}' successfully updated.`);
