@@ -41,14 +41,14 @@ jobs:
               branch,
               enforce_admins: protection.data.enforce_admins.enabled,
               required_pull_request_reviews: protection.data.required_pull_request_reviews,
-              required_status_checks: protection.data.required_status_checks,
-              restrictions: protection.data.restrictions,
+              required_status_checks: protection.data.required_status_checks.enabled,
+              restrictions: protection.data.restrictions.enabled,
               allow_force_pushes: updatedProtection.allow_force_pushes, // 更新内容
               allow_deletions: updatedProtection.allow_deletions, // 更新内容
-              block_creations: protection.data.block_creations,
-              required_conversation_resolution: protection.data.required_conversation_resolution,
+              block_creations: protection.data.block_creations.enabled,
+              required_conversation_resolution: protection.data.required_conversation_resolution.enabled,
               lock_branch: true, // 更新内容
-              allow_fork_syncing: protection.data.allow_fork_syncing 
+              allow_fork_syncing: protection.data.allow_fork_syncing.enabled 
             });
 
             console.log(`Branch protection for '${branch}' successfully updated.`);
