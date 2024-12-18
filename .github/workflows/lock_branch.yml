@@ -50,8 +50,8 @@ jobs:
                 required_approving_review_count:  protection.data.required_pull_request_reviews.required_approving_review_count,
                 require_last_push_approval :  protection.data.required_pull_request_reviews.require_last_push_approval,
                 bypass_pull_request_allowances : {
-                  // users: [],
-                  // teams : [],
+                  users: [],
+                  teams : [],
                   apps : []
                 },
               },
