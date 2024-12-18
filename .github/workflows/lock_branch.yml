@@ -38,6 +38,11 @@ jobs:
               repo,
               branch,
               lock_branch: true, // 更新内容
+              required_status_checks: null,
+              enforce_admins: null,
+              required_pull_request_reviews: null,
+              restrictions: null, // "Only organization repositories can have users and team restrictions"
             });
             
             console.log(`Branch protection for '${branch}' successfully updated.`);
+
