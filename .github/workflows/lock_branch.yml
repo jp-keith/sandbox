@@ -1,32 +1,46 @@
-# This is a basic workflow that is manually triggered
+name: Lock branch
 
-name: Manual workflow
-
-# Controls when the action will run. Workflow runs when manually triggered using the UI
-# or API.
 on:
-  workflow_dispatch:
-    # Inputs the workflow accepts.
-    inputs:
-      name:
-        # Friendly description to be shown in the UI instead of 'name'
-        description: 'Person to greet'
-        # Default value if no value is explicitly provided
-        default: 'World'
-        # Input has to be provided for the workflow to run
-        required: true
-        # The data type of the input
-        type: string
+  workflow_dispatch:  # 手動でトリガー
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "greet"
-  greet:
-    # The type of runner that the job will run on
+  update-branch-protection:
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Runs a single command using the runners shell
-    - name: Send greeting
-      run: echo "Hello ${{ inputs.name }}"
+      - name: Update Lock Branch setting
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const branch = "main"; // ロック対象のブランチ
+
+            // 現在のブランチ保護ルールを取得
+            const protection = await github.rest.repos.getBranchProtection({
+              owner,
+              repo,
+              branch,
+            });
+
+            // 必要なフィールドを更新
+            const updatedProtection = {
+              ...protection.data,
+              allow_force_pushes: false, // 強制プッシュを禁止
+              allow_deletions: false, // ブランチ削除のロック
+            };
+
+            // 更新リクエスト
+            await github.rest.repos.updateBranchProtection({
+              owner,
+              repo,
+              branch,
+              required_status_checks: updatedProtection.required_status_checks,
+              enforce_admins: updatedProtection.enforce_admins.enabled,
+              required_pull_request_reviews: updatedProtection.required_pull_request_reviews,
+              restrictions: updatedProtection.restrictions,
+              allow_force_pushes: updatedProtection.allow_force_pushes, // 更新内容
+              allow_deletions: updatedProtection.allow_deletions, // 更新内容
+            });
+
+            console.log(`Branch protection for '${branch}' successfully updated.`);
