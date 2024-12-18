@@ -55,9 +55,9 @@ jobs:
                   apps : []
                 },
               },
-              restrictions: {
-                  users: [],
-                  teams : [],
+              restrictions: { // "Only organization repositories can have users and team restrictions"
+                  // users: [],
+                  // teams : [],
                   apps : []
               },
               allow_force_pushes: updatedProtection.allow_force_pushes, // 更新内容
