@@ -49,7 +49,11 @@ jobs:
                 require_code_owner_reviews: protection.data.required_pull_request_reviews.require_code_owner_reviews || false,
                 required_approving_review_count:  protection.data.required_pull_request_reviews.required_approving_review_count,
                 require_last_push_approval :  protection.data.required_pull_request_reviews.require_last_push_approval,
-                bypass_pull_request_allowances :  protection.data.required_pull_request_reviews.bypass_pull_request_allowances || false,
+                bypass_pull_request_allowances : {
+                  users: [],
+                  teams : [],
+                  apps : []
+                },
               },
               restrictions: false,
               allow_force_pushes: updatedProtection.allow_force_pushes, // 更新内容
