@@ -1,0 +1,50 @@
+name: Create Tag and Release
+
+on:
+  push:
+    branches:
+      - main # 対象のブランチ
+
+jobs:
+  create-release:
+    runs-on: self-hosted # ユーザーの環境に合わせたランナーを指定
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set release version
+        id: set_version
+        run: echo "RELEASE_VERSION=$(date +%Y.%m.%d)" >> $GITHUB_ENV
+
+      - name: Create Git Tag
+        id: create_tag
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const tagName = process.env.RELEASE_VERSION;
+            const response = await github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: `refs/tags/${tagName}`,
+              sha: context.sha,
+            });
+            core.setOutput("tag", tagName);
+
+      - name: Create Release
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const tagName = process.env.RELEASE_VERSION;
+            const response = await github.rest.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: tagName,
+              name: `Release ${tagName}`,
+              body: "Automated release created by GitHub Actions",
+              draft: false,
+              prerelease: false,
+            });
+            core.setOutput("release_url", response.data.html_url);
+
+      - name: Output Release URL
+        run: echo "Release URL: ${{ steps.create_release.outputs.release_url }}"
