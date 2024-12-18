@@ -36,7 +36,7 @@ jobs:
               repo,
               branch,
               required_status_checks: protection.required_status_checks,
-              enforce_admins: protection.enforce_admins.enabled,
+              enforce_admins: protection.enforce_admins.properties.enabled,
               required_pull_request_reviews: protection.required_pull_request_reviews,
               restrictions: protection.restrictions,
               allow_force_pushes: updatedProtection.allow_force_pushes, // 更新内容
