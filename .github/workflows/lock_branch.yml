@@ -39,7 +39,7 @@ jobs:
               owner,
               repo,
               branch,
-              required_status_checks: protection.data.required_status_checks.enabled,
+              required_status_checks: false,
               enforce_admins: protection.data.enforce_admins.enabled,
               required_pull_request_reviews: protection.data.required_pull_request_reviews,
               restrictions: protection.data.restrictions.enabled,
