@@ -41,8 +41,6 @@ jobs:
             console.log('%o', {
               enforce_admins: protection.data.enforce_admins.enabled,
               required_pull_request_reviews: protection.data.required_pull_request_reviews,
-              required_status_checks: protection.data.required_status_checks.enabled,
-              restrictions: protection.data.restrictions.enabled,
             } );
 
             console.log('%o', {
@@ -68,8 +66,6 @@ jobs:
               branch,
               enforce_admins: protection.data.enforce_admins.enabled,
               required_pull_request_reviews: protection.data.required_pull_request_reviews,
-              required_status_checks: protection.data.required_status_checks.enabled,
-              restrictions: protection.data.restrictions.enabled,
               allow_force_pushes: updatedProtection.allow_force_pushes, // 更新内容
               allow_deletions: updatedProtection.allow_deletions, // 更新内容
               block_creations: protection.data.block_creations.enabled,
