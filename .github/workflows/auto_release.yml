@@ -47,4 +47,5 @@ jobs:
             core.setOutput("release_url", response.data.html_url);
 
       - name: Output Release URL
-        run: echo "Release URL: ${{ steps.create_release.outputs.release_url }}"
+        run: |
+          echo "Release URL: ${{ steps.create_release.outputs.release_url }}"
