@@ -39,12 +39,15 @@ jobs:
               owner,
               repo,
               branch,
-              required_status_checks: false,
+              required_status_checks: null,
               enforce_admins: protection.data.enforce_admins.enabled,
               required_pull_request_reviews: {
+                dismissal_restrictions: null,
                 dismiss_stale_reviews: protection.data.required_pull_request_reviews.dismiss_stale_reviews,
                 require_code_owner_reviews: protection.data.required_pull_request_reviews.require_code_owner_reviews,
                 required_approving_review_count:  protection.data.required_pull_request_reviews.required_approving_review_count,
+                require_last_push_approval :  protection.data.required_pull_request_reviews.require_last_push_approval,
+                bypass_pull_request_allowances :  protection.data.required_pull_request_reviews.bypass_pull_request_allowances || null,
               },
               restrictions: false,
               allow_force_pushes: updatedProtection.allow_force_pushes, // 更新内容
