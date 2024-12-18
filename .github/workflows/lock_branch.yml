@@ -24,6 +24,8 @@ jobs:
               branch,
             });
 
+            console.log(`get values: '${protection}'`);
+
             // 必要なフィールドを更新
             const updatedProtection = {
               ...protection.data,
